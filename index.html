@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio</title>
+    <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+    <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+    <link rel="stylesheet" href="https://latex.vercel.app/lang/es.css" />
+
+    <script type="text/javascript" charset="UTF-8" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+
+</head>
+<body>
+    <script>
+        MathJax = {
+        tex: {
+            inlineMath: [['$', '$'],],
+        },
+        }
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <p>Una persona desea invertir $\$5000$ durante el próximo año en dos tipos de inversión. La inversión del tipo $A$ reditúa $5\%$ y la inversión del tipo $B$ reditúa $8\%$. La investigación de mercado recomienda una asignación de por lo menos $25\%$ en $A$ y cuando mucho $50\%$ en $B$. Además la inversión en $A$ debe ser por lo menos de la mitad de la inversión en $B$. ¿Cómo deben asignarse los fondos a las dos inversiones?</p> 
+
+    <p></p>
+    <p></p>
+    <p><i>Sol.</i></p>
+
+    <p></p>
+    <p></p>
+
+    <p>Sean $x=$ "Dinero invertido en $A$" y $y=$ "Dinero invertido en $B$"</p></p>
+
+    <p>La función a maximizar es $z=0.05x+0.08y$</p>
+
+    <p>Restricciones:</p>
+
+    <ul>
+        <li>$x,y \geq 0$</li>
+        <li> <i>"desea invertir $\$5000$":</i> $x+y \leq 5000$</li>
+        <li><i>"una asignación de por lo menos $25\%$ en $A$"</i>: $0.25(x+y)\leq x$ ssi $0 \leq 0.75x-0.25y$</li>
+        <li><i>"cuando mucho $50\%$ en $B$"</i>: $0.5(x+y) \geq y$ ssi $0.5x-0.5y \geq 0$</li>
+        <li><i>"la inversión en $A$ debe ser por lo menos de la mitad de la inversión en $B$"</i>: $x \geq 0.5y$ ssi $x-0.5y \geq 0$</li>
+    </ul>
+
+    <p></p>
+
+
+    <div id="jxgbox" class="jxgbox" style="width:500px; height:500px; border: 2px solid black;"></div>
+    <script type="text/javascript">
+    var edge = 7000;
+    var board = JXG.JSXGraph.initBoard('jxgbox', {
+    boundingbox: [-1000, edge, edge, -1000],
+    showCopyright:false,
+    axis:true,
+    keepaspectratio: true,
+    pan: {
+        enabled: false
+    },
+    browserPan: false,
+    zoom: {
+        enabled: false
+    },
+});
+    var origin = board.create('point',[0,0], {fixed: true});
+    var p1 = board.create('point',[5000,0], {fixed: true});
+    var p2 = board.create('point',[0,5000], {fixed: true});
+    var r1 = board.create('line', [p1, p2], {name: 'x+y=5000',withLabel: true,
+        label:{fontSize: 18,
+                display: 'html',
+                cssStyle: 'font-family: MJXZERO, MJXTEX', offset:[280,-340]}});
+    var p3 = board.create('point',[1250,3750], {fixed: true});
+    var r2 = board.create('line', [origin, p3], {strokeColor:'#ba6ffc', name: '0.75x-0.25y=0',withLabel: true,
+        label:{fontSize: 18,
+                display: 'html',
+                cssStyle: 'font-family: MJXZERO, MJXTEX', offset:[50,400]}});
+    var p4 = board.create('point',[2500,2500], {fixed: true});
+    var r3 = board.create('line', [origin, p4], {strokeColor:'#ff4747',name: '0.5x-0.5y=0',withLabel: true,
+        label:{fontSize: 18,
+                display: 'html',
+                cssStyle: 'font-family: MJXZERO, MJXTEX', offset:[250,290]}});
+    var p5 = board.create('point',[1666.66667,3333.3333], {fixed: true});
+    var r4 = board.create('line', [origin, p5], {strokeColor:'#e7aa2c', name: 'x-0.5y=0',withLabel: true,
+        label:{fontSize: 18,
+                display: 'html',
+                cssStyle: 'font-family: MJXZERO, MJXTEX', offset:[150,320]}});
+    var pol = board.create('polygon', [origin, p1, p4]);
+    var p6 = board.create('point',[6500, 0], {fixed: true});
+    var r4 = board.create('line', [p4, p6], {strokeColor:'#027846'});
+    </script>
+
+    <p></p>
+    <p>El conjunto de posibles soluciones es el poliedro limitado por los puntos:</p>
+    <ul>
+        <li>$(0,0)$, evaluándo en nuestra función nos da $0.05(0) + 0.08(0) = 0$</li>
+        <li>$(5000,0)$ evaluándo en nuestra función nos da  $0.05(5000) + 0.08(0) = 250$</li>
+        <li>$(2500,2500)$ evaluándo en nuestra función nos da $0.05(2500) + 0.08(2500) = 325$</li>
+    </ul>
+
+    <p>Por lo tanto el máximo se alcanza al invertir $\$2500$ en cada tipo de inversión y se obtiene un retorno de $\$325$</p>
+</body>
+</html>
