@@ -1,0 +1,327 @@
+---
+format:
+  revealjs:
+    transition: fade
+filters:
+  - parse-latex
+---
+
+## {auto-animate=true}
+
+::: {style="margin-top: 200px; font-size: 2.6em; text-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191, 1px 4px 1px #919191, 1px 5px 1px #919191, 1px 6px 1px #919191, 1px 7px 1px #919191, 1px 8px 1px #919191, 1px 9px 1px #919191, 1px 10px 1px #919191, 1px 18px 6px rgba(16,16,16,0.4), 1px 22px 10px rgba(16,16,16,0.2), 1px 25px 35px rgba(16,16,16,0.2),1px 30px 60px rgba(16,16,16,0.4);"}
+**El problema de la dieta**
+:::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El problema de la dieta**
+:::
+
+El problema consiste en determinar la dieta mas económica que cumpla los requerimientos mínimos nutricionales para ser saludable. 
+
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El problema de la dieta**
+:::
+El problema consiste en determinar la dieta mas económica que cumpla los requerimientos mínimos nutricionales para ser saludable. 
+
+Suponemos que están disponibles $n$ diferentes alimentos y el $j-$ésimo alimento tiene un costo $c_j$ por unidad.
+
+Además hay $m$ ingredientes nutricionales y para alcanzar una dieta balanceada cada individuo debe recibir al menos $b_i$ unidades del $i-$ésimo
+nutriente por día. También sabemos que el $j-$ésimo alimento contiene $a_{ij}$ unidades del $i-$ésimo nutriente.
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El problema de la dieta**
+:::
+
+Si denotamos $x_j$ como el número de unidades que se consumen del alimento $j$, el problema es el siguiente:
+
+$$
+\text{min } c_1x_1 + \ldots + c_nx_n 
+$$
+
+sujeto a:
+
+$$
+\begin{aligned}
+a_{11}x_1 + a_{12}x_2 + \ldots + a_{1n}x_n &\geq b_1 \\
+\vdots \quad\quad\quad\quad\vdots\quad\quad\quad\quad\quad &\vdots \\
+a_{m1}x_1 + a_{m2}x_2 + \ldots + a_{mn}x_n &\geq b_m
+\end{aligned}
+$$
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Ejemplo**
+:::
+
+Una empresa quiere fabricar un cereal de 12 onzas compuesto de trigo, arroz y maíz. Dicho cereal tiene unos requerimientos mínimos de proteína y carbohidratos para ser saludable. Además se quiere que el cereal no tenga más de 1260 calorías.
+
+La información de los ingredientes se muestra en la siguiente tabla:
+
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Ejemplo**
+:::
+
+
+```{=latex}
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|c|}
+\textbf{Alimento} & \textbf{Costo por} & \multicolumn{3}{c|}{\textbf{Contenido nutritivo}}\\
+& \textbf{unidad} & \textit{Proteína} & \textit{Carbohidratos} & \textit{Calorías}  \\
+Trigo & \$0.03/\textit{oz} & 4 \textit{g}/\textit{oz}  & 20\textit{g}/\textit{oz} & 90/\textit{oz} \\
+Arroz & \$0.05/\textit{oz} & 2 \textit{g}/\textit{oz} & 25\textit{g}/\textit{oz} & 110/\textit{oz} \\
+Maíz & \$0.02/\textit{oz} & 2 \textit{g}/\textit{oz} & 21\textit{g}/\textit{oz} & 100/\textit{oz} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Necesidades de nutrición}} & \textit{Al menos} 27\textit{g} & \textit{Al menos} 240\textit{g} & \textit{No más de }1260\textit{ cal}\\
+\hline
+\end{tabular}
+\end{table}
+```
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Ejemplo**
+:::
+
+Sean
+
+- $x_1=$ Número de onzas de trigo.
+- $x_2=$ Número de onzas de arroz.
+- $x_3=$ Número de onzas de maíz.
+
+Queremos minimizar $z = 0.03x_1+0.05x_2+0.02x_3$
+
+## {auto-animate=true auto-animate-delay="0.7"}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Ejemplo**
+:::
+
+
+Con las siguientes restricciones:
+
+::: {data-id="box1"}
+$$
+\begin{aligned}
+4x_1&+2x_2+2x_3\geq 27 \\
+20x_1&+25x_2+21x_3\geq 240 \\
+90x_1&+110x_2+100x_3\leq 1260 \\
+x_1&+x_2+x_3= 12 \\
+\end{aligned}
+$$
+:::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Ejemplo**
+:::
+
+
+Agregamos varibles de holgura, exceso y artificiales:
+
+
+::: {data-id="box1" }
+$$
+\begin{aligned}
+4x_1&+2x_2+2x_3-s1+A_1=27 \\
+20x_1&+25x_2+21x_3-s2+A_2=240 \\
+90x_1&+110x_2+100x_3+s3=1260 \\
+x_1&+x_2+x_3+A_3= 12 \\
+\end{aligned}
+$$
+
+:::
+
+
+## {auto-animate=true}
+
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ | Sol  |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $0$  |  $0$  |  $0$  |  $0$ |  $0$  |  $-1$ |  $-1$ |  $0$   |  $-1$ |  $0$ |
+|$A_1$ |  $4$  |  $2$  | $2$   | $-1$ |  $0$  |  $1$  |  $0$  |  $0$   |  $0$  | $27$ |
+| $A_2$| $20$  |  $25$ |  $21$ | $0$  | $-1$  |  $0$  |   $1$ |  $0$   |  $0$  | $240$|
+|$s_3$ |  $90$ | $110$ | $100$ | $0$  | $0$   |  $0$  |  $0$  |  $1$   |  $0$  |$1260$|
+|$A_3$ | $1$   | $1$   |  $1$  | $0$  |   $0$ |  $0$  |   $0$ |  $0$   | $1$   |  $12$|
+
+
+## {auto-animate=true}
+
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $25$ | $28$  | $24$  | $-1$ | $-1$  |  $0$  |  $0$  |  $0$   |  $0$  | $279$|
+|$A_1$ |  $4$  |  $2$  | $2$   | $-1$ |  $0$  |  $1$  |  $0$  |  $0$   |  $0$  | $27$ |
+| $A_2$| $20$  | $25$  |  $21$ | $0$  | $-1$  |  $0$  |  $1$  |  $0$   |  $0$  | $240$|
+|$s_3$ |  $90$ | $110$ | $100$ | $0$  |  $0$  |  $0$  |  $0$  |  $1$   |  $0$  |$1260$|
+|$A_3$ |  1$   | $1$   |  $1$  | $0$  |  $0$  |  $0$  |   $0$ |  $0$   |  $1$  | $12$ |
+
+
+## {auto-animate=true}
+
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $25$ | $\color{#909}{28}$  | $24$  | $-1$ | $-1$  |  $0$  |  $0$  |  $0$   |  $0$  | $279$|
+|$A_1$ |  $4$  |  $2$  | $2$   | $-1$ |  $0$  |  $1$  |  $0$  |  $0$   |  $0$  | $27$ |
+| $A_2$| $20$  | $\color{#F00}{25}$  |  $21$ | $0$  | $-1$  |  $0$  |  $1$  |  $0$   |  $0$  | $240$|
+|$s_3$ |  $90$ | $110$ | $100$ | $0$  |  $0$  |  $0$  |  $0$  |  $1$   |  $0$  |$1260$|
+|$A_3$ |  1$   | $1$   |  $1$  | $0$  |  $0$  |  $0$  |   $0$ |  $0$   |  $1$  | $12$ |
+
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $13/5$ | $0$  | $12/25$  | $-1$ | $3/25$  |  $0$  |  $-28/25$  |  $0$   |  $0$  | $51/5$|
+|$A_1$ |  $12/5$  |  $0$  | $8/25$   | $-1$ |  $2/25$  |  $1$  |  $-2/25$  |  $0$   |  $0$  | $39/5$ |
+| $x_2$| $4/5$  | $1$  |  $21/25$ | $0$  | $-1/25$  |  $0$  |  $1/25$  |  $0$   |  $0$  | $48/5$|
+|$s_3$ |  $2$ | $0$ | $38/5$ | $0$  |  $22/5$  |  $0$  |  $-22/5$  |  $1$   |  $0$  |$204$|
+|$A_3$ |  $1/5$   | $0$   |  $4/25$  | $0$  |  $1/25$  |  $0$  |   $-1/25$ |  $0$   |  $1$  | $12/5$ |
+
+:::
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $\color{#909}{13/5}$ | $0$  | $12/25$  | $-1$ | $3/25$  |  $0$  |  $-28/25$  |  $0$   |  $0$  | $51/5$|
+|$A_1$ |  $\color{#F00}{12/5}$  |  $0$  | $8/25$   | $-1$ |  $2/25$  |  $1$  |  $-2/25$  |  $0$   |  $0$  | $39/5$ |
+| $x_2$| $4/5$  | $1$  |  $21/25$ | $0$  | $-1/25$  |  $0$  |  $1/25$  |  $0$   |  $0$  | $48/5$|
+|$s_3$ |  $2$ | $0$ | $38/5$ | $0$  |  $22/5$  |  $0$  |  $-22/5$  |  $1$   |  $0$  |$204$|
+|$A_3$ |  $1/5$   | $0$   |  $4/25$  | $0$  |  $1/25$  |  $0$  |   $-1/25$ |  $0$   |  $1$  | $12/5$ |
+
+:::
+
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $0$ | $0$  | $2/15$  | $1/12$ | $1/30$  |  $-13/12$  |  $-31/30$  |  $0$   |  $0$  | $7/4$|
+|$x_1$ |  $1$  |  $0$  | $2/15$   | $-5/12$ |  $1/30$  |  $5/12$  |  $-1/30$  |  $0$   |  $0$  | $13/4$ |
+| $x_2$| $0$  | $1$  |  $11/15$ | $1/3$  | $-1/15$  |  $-1/3$  |  $1/15$  |  $0$   |  $0$  | $7$|
+|$s_3$ |  $0$ | $0$ | $22/3$ | $5/6$  |  $13/3$  |  $-5/6$  |  $-13/3$  |  $1$   |  $0$  |$395/2$|
+|$A_3$ |  $0$   | $0$   |  $2/15$  | $1/12$  |  $1/30$  |  $-1/12$  |   $-1/30$ |  $0$   |  $1$  | $7/4$ |
+
+:::
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $0$ | $0$  | $\color{#909}{2/15}$  | $1/12$ | $1/30$  |  $-13/12$  |  $-31/30$  |  $0$   |  $0$  | $7/4$|
+|$x_1$ |  $1$  |  $0$  | $2/15$   | $-5/12$ |  $1/30$  |  $5/12$  |  $-1/30$  |  $0$   |  $0$  | $13/4$ |
+| $x_2$| $0$  | $1$  |  $\color{#F00}{11/15}$ | $1/3$  | $-1/15$  |  $-1/3$  |  $1/15$  |  $0$   |  $0$  | $7$|
+|$s_3$ |  $0$ | $0$ | $22/3$ | $5/6$  |  $13/3$  |  $-5/6$  |  $-13/3$  |  $1$   |  $0$  |$395/2$|
+|$A_3$ |  $0$   | $0$   |  $2/15$  | $1/12$  |  $1/30$  |  $-1/12$  |   $-1/30$ |  $0$   |  $1$  | $7/4$ |
+
+:::
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $0$ | $-2/11$  | $0$  | $1/44$ | $1/22$  |  $-45/44$  |  $-23/22$  |  $0$   |  $0$  | $21/44$|
+|$x_1$ |  $1$  |  $-2/11$  | $0$   | $-21/44$ |  $1/22$  |  $21/44$  |  $-1/22$  |  $0$   |  $0$  | $87/44$ |
+| $x_3$| $0$  | $15/11$  |  $1$ | $5/11$  | $-1/11$  |  $-5/11$  |  $1/11$  |  $0$   |  $0$  | $105/11$|
+|$s_3$ |  $0$ | $-10$ | $0$ | $-5/2$  |  $5$  |  $5/2$  |  $-5$  |  $1$   |  $0$  |$255/2$|
+|$A_3$ |  $0$   | $-2/11$   |  $0$  | $1/44$  |  $1/22$  |  $-1/44$  |  $-1/22$ |  $0$   |  $1$  | $21/44$ |
+
+:::
+
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $0$ | $-2/11$  | $0$  | $1/44$ | $\color{#909}{1/22}$  |  $-45/44$  |  $-23/22$  |  $0$   |  $0$  | $21/44$|
+|$x_1$ |  $1$  |  $-2/11$  | $0$   | $-21/44$ |  $1/22$  |  $21/44$  |  $-1/22$  |  $0$   |  $0$  | $87/44$ |
+| $x_3$| $0$  | $15/11$  |  $1$ | $5/11$  | $-1/11$  |  $-5/11$  |  $1/11$  |  $0$   |  $0$  | $105/11$|
+|$s_3$ |  $0$ | $-10$ | $0$ | $-5/2$  |  $5$  |  $5/2$  |  $-5$  |  $1$   |  $0$  |$255/2$|
+|$A_3$ |  $0$   | $-2/11$   |  $0$  | $1/44$  |  $\color{#F00}{1/22}$  |  $-1/44$  |  $-1/22$ |  $0$   |  $1$  | $21/44$ |
+
+:::
+
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $A_1$ | $A_2$ |  $s_3$ | $A_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|-------|--------|-------|------|
+| $z$  |  $0$ | $0$  | $0$  | $0$ | $0$  |  $-1$  |  $-1$  |  $0$   |  $-1$  | $0$|
+|$x_1$ |  $1$  |  $0$  | $0$   | $-1/2$ |  $0$  |  $1/2$  |  $0$  |  $0$   |  $-1$  | $3/2$ |
+| $x_3$| $0$  | $1$  |  $1$ | $1/2$  | $0$  |  $-1/2$  |  $0$  |  $0$   |  $2$  | $21/2$|
+|$s_3$ |  $0$ | $10$ | $0$ | $-5$  |  $0$  |  $5$  |  $0$  |  $1$   |  $110$  |$75$|
+|$s_2$ |  $0$   | $-4$   |  $0$  | $1/2$  |  $1$  |  $-1/2$  |  $-1$ |  $0$   |  $22$  | $21/2$ |
+
+:::
+
+
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $s_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|------|
+| $z$  |  $-0.03$  |  $-0.05$  |  $-0.02$  |  $0$ |  $0$  | $0$   | $0$  |
+|$x_1$ |  $1$  |  $0$  | $0$   |$-1/2$ |  $0$  |  $0$  |$3/2$ |
+| $x_3$| $0$   |  $1$  |   $1$ |$1/2$|  $0$  |  $0$  |$21/2$|
+|$s_3$ |  $0$  |  $10$ |  $0$  | $-5$ |  $0$  |  $1$  | $75$ |
+|$s_2$ |  $0$  | $-4$  |  $0$  |$1/2$ |  $1$  |  $0$  |$21/2$|
+
+:::
+
+## {auto-animate=true}
+
+::: {style="font-size: 0.8em;"}
+
+| V.B. | $x_1$ | $x_2$ | $x_3$ | $s_1$| $s_2$ | $s_3$ |  Sol |
+|------|-------|-------|-------|------|-------|-------|------|
+| $z$  |  $0$  |$-0.03$|  $0$  |  $-1/200$ |  $0$  | $0$ | $51/200$  |
+|$x_1$ |  $1$  |  $0$  | $0$   |$1/2$ |  $0$  |  $0$  |$3/2$ |
+| $x_3$| $0$   |  $1$  |   $1$ |$-1/2$|  $0$  |  $0$  |$21/2$|
+|$s_3$ |  $0$  |  $10$ |  $0$  | $-5$ |  $0$  |  $1$  | $75$ |
+|$s_2$ |  $0$  | $-4$  |  $0$  |$1/2$ |  $1$  |  $0$  |$21/2$|
+
+:::
+
+::: {style="font-size: 0.8em;"}
+
+\
+
+La solución óptima al problema original es 
+
+$x_1=3/2, x_2=0, x_3=21/2$ con $z=51/200$
+
+Y el cereal tiene $27g$ de proteína, $250.5g$ de carbohidratos y $1185$ calorías.
+
+:::
