@@ -1,0 +1,218 @@
+---
+format:
+  revealjs:
+    transition: fade
+filters:
+  - parse-latex
+---
+
+## {auto-animate=true}
+
+::: {style="margin-top: 200px; font-size: 2.6em;"}
+**El Método de Newton**
+:::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Supongamos que queremos minimizar una función $f:\mathbb{R}\rightarrow\mathbb{R}$, entonces el método de Newton nos da un algoritmo **iterativo** para poder aproximarnos al valor $\alpha\in\mathbb{R}$ que minimiza a la función objetivo $f$.
+
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+El método se basa en minimizar una **aproximación cuadrática** de nuestra función objetivo que obtenemos a partir del **Polinomio de Taylor** al rededor de un punto $x_k$. 
+
+$f(x) = x^2-sin(x)$ y su aproximación cuadrática.
+
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Si suponemos que para algún punto $x_k$ podemos calcular $f'(x_k)$ y $f''(x_k)$ podemos crear la aproximación de la siguiente forma: 
+
+$$q(x) = f(x_k) + f'(x_k)(x - x_k) + \frac{f''(x_k)}{2}(x - x_k)^2$$
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+
+$$q'(x) = f'(x_k) + f''(x_k)(x - x_k)$$
+
+$$q''(x) =  f''(x_k)$$
+
+Así que
+
+$$q'(x_k) = f'(x_k)$$
+
+$$q''(x_k) =  f''(x_k)$$
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Igualando la primera derivada a 0 y sacando su raíz obtenemos la regla de actualización del método de Newton: 
+
+$$q'(x) = f'(x_k) + f''(x_k)(x - x_k) = 0$$
+
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Igualando la primera derivada a 0 y sacando su raíz obtenemos la regla de actualización del método de Newton: 
+
+$$f''(x_k)(x - x_k) = -f'(x_k)$$
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Igualando la primera derivada a 0 y sacando su raíz obtenemos la regla de actualización del método de Newton: 
+
+$$x - x_k = -\frac{f'(x_k)}{f''(x_k)}$$
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Igualando la primera derivada a 0 y sacando su raíz obtenemos la regla de actualización del método de Newton: 
+
+
+$$x  =  x_k - \frac{f'(x_k)}{f''(x_k)}$$
+
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+
+Igualando la primera derivada a 0 y sacando su raíz obtenemos la regla de actualización del método de Newton: 
+
+
+$$x_{k+1}  =  x_k - \frac{f'(x_k)}{f''(x_k)}$$
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Desventajas**
+:::
+
+- El método requiere $f''(x_k)\neq 0$. En caso contrario la siguiente iteración no está definida.
+
+- Si $f''(x_k)$ es muy cercano a  $0$, la siguiente iteración podría estar muy lejos de $x_k$, es decir, estaría lejos de donde la aproximación es válida.
+
+- Si $f''(x_k) < 0$ para algún $x_k$, el método de Newton puede fallar en converger al mínimo.
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Ventajas**
+:::
+
+- Convergencia cuadrática:
+
+Si $\alpha$ minimiza a la función objetivo, $\lim_{k\rightarrow\infty}\frac{|x_{k+1}-\alpha|}{|x_{k}-\alpha|^2}=C$
+
+con $C>0$.
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Código**
+:::
+
+
+```python
+def newton(x_0, first_derivate, second_derivate, max_iter = 1000, tol = 0.0001):
+```
+
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Código**
+:::
+
+
+```python
+def newton(x_0, first_derivate, second_derivate, max_iter = 1000, tol = 0.0001):
+  
+  x_k = x_0 + 100*tol
+  x_k_next = x_0
+  count = 0
+  while tol <= abs(x_k_next - x_k) and count <= max_iter:
+    x_k = x_k_next 
+```
+
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Código**
+:::
+
+
+```python
+def newton(x_0, first_derivate, second_derivate, max_iter = 1000, tol = 0.0001):
+  
+  x_k = x_0 + 100*tol
+  x_k_next = x_0
+  count = 0
+  while tol <= abs(x_k_next - x_k) and count <= max_iter:
+    x_k = x_k_next 
+    try:
+      x_k_next = x_k - first_derivate(x_k)/second_derivate(x_k)
+    except ZeroDivisionError:
+      print("El valor de la 2da derivada en x_k es 0. Se termina la ejecución")
+      break
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Código**
+:::
+
+
+```python
+def newton(x_0, first_derivate, second_derivate, max_iter = 1000, tol = 0.0001):
+  
+  x_k = x_0 + 100*tol
+  x_k_next = x_0
+  count = 0
+  while tol <= abs(x_k_next - x_k) and count <= max_iter:
+    x_k = x_k_next 
+    try:
+      x_k_next = x_k - first_derivate(x_k)/second_derivate(x_k)
+    except ZeroDivisionError:
+      print("El valor de la 2da derivada en x_k es 0. Se termina la ejecución")
+      break
+    count += 1
+
+  return x_k_next
+```

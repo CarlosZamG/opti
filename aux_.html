@@ -1,0 +1,52 @@
+.disp {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+
+<script type="text/javascript" charset="UTF-8" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+
+<div class="disp" style="width:100%; height: 50%;">
+<div id="box1" class="jxgbox" style="width:40%; height: 100%; border: 2px solid black;"></div>
+<p style="width:40%">     <span class="math inline">\(   f(x) = x^2-sin(x)\)</span> y su aproximación cuadrática.</p>
+</div>
+
+
+    <script type="text/javascript">
+    var edge = 7000;
+    var board = JXG.JSXGraph.initBoard('box1', {
+    boundingbox: [-5, 5, 5, -1],
+    showCopyright:false,
+    axis:true,
+    keepaspectratio: true,
+    pan: {
+        enabled: false
+    },
+    browserPan: false,
+    zoom: {
+        enabled: false
+    },
+    showScreenshot:true,
+});
+    var obj_f = function(x){ return 0.5*x*x-Math.sin(x);}
+
+    var f_graph = board.create('functiongraph',
+                            [obj_f, -5, 5],{strokeWidth: 3}
+                    );
+
+    var sli = board.create('slider', [[-4, -1], [-2,-1], [-3.5, -3, 3.5]], {name:'', snapWidth: 0.1});
+
+    
+    var f_d = function(x){return x-Math.cos(x);}
+    var s_d = function(x){return 1+Math.sin(x);}
+
+    var q = function(x){return obj_f(sli.Value()) + f_d(sli.Value())*(x-sli.Value())+0.5*s_d(sli.Value())*(x-sli.Value())*(x-sli.Value());}
+
+
+    var q_graph = board.create('functiongraph',
+                            [q, -6, 6], {strokeColor: JXG.palette.green, strokeWidth: 2}
+                    );
+    
+
+    var point = board.create('point', [function(){ return sli.Value()}, function(){ return q(sli.Value()) }]);
+    </script>
