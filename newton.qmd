@@ -29,7 +29,7 @@ Supongamos que queremos minimizar una función $f:\mathbb{R}\rightarrow\mathbb{R
 
 El método se basa en minimizar una **aproximación cuadrática** de nuestra función objetivo que obtenemos a partir del **Polinomio de Taylor** al rededor de un punto $x_k$. 
 
-$f(x) = x^2-sin(x)$ y su aproximación cuadrática.
+$f(x) = \frac{x^2}{2}-sin(x)$ y su aproximación cuadrática.
 
 
 ## {auto-animate=true}

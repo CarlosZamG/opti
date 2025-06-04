@@ -386,10 +386,11 @@
       margin-right: 0; 
     }
 
-    .disp {
+    .disp_box {
       display: flex;
       justify-content: space-evenly;
     }
+
   </style>
 </head>
 <body class="quarto-light">
@@ -416,14 +417,13 @@
 <p><strong>El Método de Newton</strong></p>
 </div>
 <p>El método se basa en minimizar una <strong>aproximación cuadrática</strong> de nuestra función objetivo que obtenemos a partir del <strong>Polinomio de Taylor</strong> al rededor de un punto <span class="math inline">\(x_k\)</span>.</p>
-<div class="disp" style="width:100%; height: 50%;">
+<div class="disp_box" style="width:100%; height: 50%;">
 <div id="box1" class="jxgbox" style="width:40%; height: 100%; border: 2px solid black;"></div>
-<p style="width:40%">     <span class="math inline">\(   f(x) = \frac{x^2}{2}-sin(x)\)</span> y su aproximación cuadrática.</p>
+<p style="width:40%"> <span class="math inline">\(f(x) = \frac{x^2}{2}-sin(x)\)</span> y su aproximación cuadrática.</p>
 </div>
 
 
     <script type="text/javascript">
-    var edge = 7000;
     var board = JXG.JSXGraph.initBoard('box1', {
     boundingbox: [-5, 5, 5, -1],
     showCopyright:false,
