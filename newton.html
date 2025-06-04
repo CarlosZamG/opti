@@ -100,7 +100,6 @@
   <link href="newton_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="newton_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <script type="text/javascript" charset="UTF-8" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
-
   <style type="text/css">
 
   .callout {
@@ -386,7 +385,7 @@
       margin-right: 0; 
     }
 
-    .disp_box {
+    .disp {
       display: flex;
       justify-content: space-evenly;
     }
@@ -417,13 +416,14 @@
 <p><strong>El Método de Newton</strong></p>
 </div>
 <p>El método se basa en minimizar una <strong>aproximación cuadrática</strong> de nuestra función objetivo que obtenemos a partir del <strong>Polinomio de Taylor</strong> al rededor de un punto <span class="math inline">\(x_k\)</span>.</p>
-<div class="disp_box" style="width:100%; height: 50%;">
+<div class="disp" style="width:100%; height: 50%;">
 <div id="box1" class="jxgbox" style="width:40%; height: 100%; border: 2px solid black;"></div>
-<p style="width:40%"> <span class="math inline">\(f(x) = \frac{x^2}{2}-sin(x)\)</span> y su aproximación cuadrática.</p>
+<p style="width:40%"><span class="math inline">\(f(x) = \frac{x^2}{2}-sin(x)\)</span> y su aproximación cuadrática.</p>
 </div>
 
 
     <script type="text/javascript">
+    var edge = 7000;
     var board = JXG.JSXGraph.initBoard('box1', {
     boundingbox: [-5, 5, 5, -1],
     showCopyright:false,
@@ -545,11 +545,18 @@
 <section id="section-12" class="slide level2" data-auto-animate="true" data-auto-animate-unmatched="false">
 <h2 data-id="quarto-animate-title"></h2>
 <div style="margin-top: 5%; font-size: 1.5em;">
+<p><strong>Teorema</strong></p>
+</div>
+<p>Sea <span class="math inline">\(f:[a,b]\rightarrow\mathbb{R}\)</span> tres veces derivable y con su tercera derivada continua. Si existe <span class="math inline">\(x^*\in[a,b]\)</span> tal que <span class="math inline">\(f'(x^*)=0\)</span> y <span class="math inline">\(f''(x^*)&gt;0\)</span> entonces el método de Newton converge a <span class="math inline">\(x^*\)</span> empezando en un punto <span class="math inline">\(x_0\)</span> lo suficientemente cercano a <span class="math inline">\(x^*\)</span>.</p>
+</section>
+<section id="section-13" class="slide level2" data-auto-animate="true" data-auto-animate-unmatched="false">
+<h2 data-id="quarto-animate-title"></h2>
+<div style="margin-top: 5%; font-size: 1.5em;">
 <p><strong>Código</strong></p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb1-1" class="hljs-ln-code"><a href="#cb1-1"></a><span class="kw">def</span> newton(x_0, first_derivate, second_derivate, max_iter <span class="op">=</span> <span class="dv">1000</span>, tol <span class="op">=</span> <span class="fl">0.0001</span>):</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-13" class="slide level2" data-auto-animate="true" data-auto-animate-unmatched="false">
+<section id="section-14" class="slide level2" data-auto-animate="true" data-auto-animate-unmatched="false">
 <h2 data-id="quarto-animate-title"></h2>
 <div style="margin-top: 5%; font-size: 1.5em;">
 <p><strong>Código</strong></p>
@@ -562,7 +569,7 @@
 <span id="cb2-6" class="hljs-ln-code"><a href="#cb2-6"></a>  <span class="cf">while</span> tol <span class="op">&lt;=</span> <span class="bu">abs</span>(x_k_next <span class="op">-</span> x_k) <span class="kw">and</span> count <span class="op">&lt;=</span> max_iter:</span>
 <span id="cb2-7" class="hljs-ln-code"><a href="#cb2-7"></a>    x_k <span class="op">=</span> x_k_next </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-14" class="slide level2" data-auto-animate="true" data-auto-animate-unmatched="false">
+<section id="section-15" class="slide level2" data-auto-animate="true" data-auto-animate-unmatched="false">
 <h2 data-id="quarto-animate-title"></h2>
 <div style="margin-top: 5%; font-size: 1.5em;">
 <p><strong>Código</strong></p>
@@ -580,7 +587,7 @@
 <span id="cb3-11" class="hljs-ln-code"><a href="#cb3-11"></a>      <span class="bu">print</span>(<span class="st">"El valor de la 2da derivada en x_k es 0. Se termina la ejecución"</span>)</span>
 <span id="cb3-12" class="hljs-ln-code"><a href="#cb3-12"></a>      <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="section-15" class="slide level2" data-auto-animate="true" data-auto-animate-unmatched="false">
+<section id="section-16" class="slide level2" data-auto-animate="true" data-auto-animate-unmatched="false">
 <h2 data-id="quarto-animate-title"></h2>
 <div style="margin-top: 5%; font-size: 1.5em;">
 <p><strong>Código</strong></p>

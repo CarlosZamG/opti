@@ -141,6 +141,15 @@ con $C>0$.
 ## {auto-animate=true auto-animate-unmatched=false}
 
 ::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Teorema**
+:::
+
+Sea $f:[a,b]\rightarrow\mathbb{R}$ tres veces derivable y con su tercera derivada continua. Si existe $x^*\in[a,b]$ tal que $f'(x^*)=0$ y $f''(x^*)>0$ entonces el método de Newton converge a $x^*$ empezando en un punto $x_0$ lo suficientemente cercano a $x^*$. 
+
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
 **Código**
 :::
 
