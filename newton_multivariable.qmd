@@ -1,0 +1,128 @@
+---
+format:
+  revealjs:
+    transition: fade
+filters:
+  - parse-latex
+lang: es
+---
+
+## {auto-animate=true}
+
+::: {style="margin-top: 200px; font-size: 2.6em;"}
+**El Método de Newton Multivariable**
+:::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Supongamos que queremos minimizar una función $f:\mathbb{R}^n\rightarrow\mathbb{R}$, entonces el método de Newton nos da un algoritmo **iterativo** para poder aproximarnos al valor $x^*\in\mathbb{R}^n$ que minimiza a la función objetivo $f$.
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+La idea del método es que dado un punto inicial se usa el **Polinomio de Taylor** para construir una aproximación cuadrática a la función objetivo minimizar dicha aproximación cuadrática.
+
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+La idea del método es que dado un punto inicial se usa el **Polinomio de Taylor** para construir una aproximación cuadrática a la función objetivo minimizar dicha aproximación cuadrática.
+
+:::{.callout-warning}
+Para poder construir la aproximación cuadrática con el Polinomio de Taylor debemos suponer que $f\in C^2(\mathbb{R}^n)$
+:::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+$f(x,y)=\sin(\frac{xy}{4})$
+
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+La aproximación cuadrática alrededor del punto $x_k$ nos queda:
+
+$$q(x) = f(x_k)+(x-x_k)^T\nabla f(x_k) + \frac{1}{2}(x-x_k)^T H f_{x_k}(x-x_k)$$
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Aplicando las condiciones necesarias de primer orden:
+
+$$\nabla q(x) = \nabla f(x_k) + H f_{x_k}(x-x_k) = 0$$
+
+Si $H f_{x_k} > 0$, entonces $q$ alcanza un mínimo en 
+
+$$x = x_k - H f_{x_k}^{-1}\nabla f(x_k)$$
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Así obtenemos la fórmula iterativa del método de Newton:
+
+$$x_{k+1} = x_k - H f_{x_k}^{-1}\nabla f(x_k)$$
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**El Método de Newton**
+:::
+
+Notemos que podemos escribir la fórmula en dos pasos:
+
+1. Consideramos el sistema $H f_{x_k}d_k = -\nabla f(x_k)$ y resolvemos para $d_k$.  
+
+2. Entonces $x_{k+1} = x_k + d_k$.
+
+## {auto-animate=true}
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Desventajas del método**
+:::
+
+1. Para poder calcular $x_{k+1}$ necesitamos que $H f_{x_k}$ sea invertible.
+
+2. Se debe resolver el sistema $H f_{x_k}d_k = -\nabla f(x_k)$.
+
+3. No hay garantía de que el método de Newton converja hacia el mínimo de la función objetivo si no se cumple que $H f_{x_k} > 0$.
+
+4. Incluso si $H f_{x_k} > 0$, puede suceder que $f(x_{k+1}) \geq f(x_{k})$.
+
+## {auto-animate=true}
+
+
+::: {style="margin-top: 5%; font-size: 1.5em;"}
+**Teorema**
+:::
+
+Suponga que $f \in C^3(\mathbb{R}^n)$ y $x^* \in \mathbb{R}^n$ es un punto tal que $\nabla f(x^*) = 0$ y $H f_{x^*}$ es invertible. Entonces, para todo $x_{0}$ suficientemente cercano a $x^*$, el método de Newton está bien definido para todo $k\in\mathbb{N}$ y converge a $x^*$.
+
+::: {.callout-warning}
+En el teorema anterior no nos dice nada de que $x^*$ sea un minimizador local. Por ejemplo, si $x^*$ es un maximizador local, el método de Newton puede convergerger a $x^*$ si comenzamos lo suficientemente cerca de él.
+:::
+
+## {auto-animate=true}
+
+[Código](https://colab.research.google.com/drive/1UoCIayKggdx5RoMmfMF2nYe0mRe2tKss?usp=sharing)

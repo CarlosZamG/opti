@@ -1,0 +1,88 @@
+<script type="text/javascript" charset="UTF-8" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+<div id="box1" class="jxgbox" style="width:70%; height: 80%; border: 2px solid black;"></div>
+<script type="text/javascript">
+var board = JXG.JSXGraph.initBoard('box1', {
+    boundingbox: [-10, 10, 10, -10],
+    showCopyright:false,
+    keepaspectratio: false,
+    showScreenshot:true,
+});
+
+var slider_x = board.create('slider', [[-4, -8], [4,-8], [-5, -0, 5]], {name:'', snapWidth: 0.1});
+var slider_y = board.create('slider', [[8, -4], [8, 4], [-5, -0, 5]], {name:'', snapWidth: 0.1});
+
+
+
+var box = [-5, 5];
+var view = board.create('view3d',
+    [
+        [-7, -6], [12, 12],
+        [box, box, box]
+    ],
+    {
+        xPlaneRear: {visible: false},
+        yPlaneRear: {visible: false},
+    });
+
+// Function F to be plotted
+var F = (x, y) => Math.sin(x * y / 4);
+
+var grad = function(x,y){
+  return [(y/4)*Math.cos(x*y/4), (x/4)*Math.cos(x*y/4)]
+}
+
+var Hessian = function(x,y){
+  return [[(-y*y/16)*Math.sin(x*y/4), Math.cos(x*y/4)/4 - (x*y/16)*Math.sin(x*y/4)],
+          [Math.cos(x*y/4)/4 - (x*y/16)*Math.sin(x*y/4), (-x*x/16)*Math.sin(x*y/4)]];
+}
+
+var p = view.create('point3d', [function(){return slider_x.Value()},
+                                function(){return slider_y.Value()},
+                                function(){return F(slider_x.Value(),slider_y.Value())}], { name:'A', size: 5 });
+
+
+var Q = function(x, y){
+  x_0 = [0 , 0];
+  
+  aux = [x - slider_x.Value(), y - slider_y.Value()];
+
+  s1 = F(slider_x.Value(), slider_y.Value());
+  g = grad(slider_x.Value(), slider_y.Value());
+  H = Hessian(slider_x.Value(), slider_y.Value());
+  
+  s2 = JXG.Math.innerProduct(g, aux);
+  
+  s3 = JXG.Math.matVecMult(H, aux);
+  s3 = JXG.Math.innerProduct(aux, s3);
+  s3 = 0.5*s3;
+  
+  var ret = s1 + s2 + s3;
+  
+  //console.log(ret)
+  return ret;
+}
+
+// 3D surface
+var c = view.create('functiongraph3d', [
+    F,
+    box, // () => [-s.Value()*5, s.Value() * 5],
+    box, // () => [-s.Value()*5, s.Value() * 5],
+], {
+    strokeWidth: 0.9,
+    stepsU: 70,
+    stepsV: 70
+});
+
+// 3D surface
+var c = view.create('functiongraph3d', [
+    Q,
+    box, // () => [-s.Value()*5, s.Value() * 5],
+    box, // () => [-s.Value()*5, s.Value() * 5],
+], {
+    strokeWidth: 0.7,
+    stepsU: 70,
+    stepsV: 70,
+    strokeColor:JXG.palette.green
+});
+
+</script>
